@@ -196,7 +196,7 @@
   //          No accumulator is given so the first element is used.
 
   _.reduce = function(collection, iterator, accumulator) {
-    var initial = (accumulator === undefined)
+    var initial = (accumulator === undefined);
     _.each(collection, function(element) {
       if (initial) {
         accumulator = element;
