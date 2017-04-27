@@ -127,7 +127,9 @@
     //   }
     // }
     */
-    /*
+
+    // Option 3 using _.indexOf
+
     if (Array.isArray(array)) {
       for (var i = 0; i < array.length; i++) {
         if ((_.indexOf(results, array[i])) === -1) {
@@ -192,7 +194,18 @@
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
+
   _.reduce = function(collection, iterator, accumulator) {
+    var initial = (accumulator === undefined)
+    _.each(collection, function(element) {
+      if (initial) {
+        accumulator = element;
+        initial = false;
+      } else {
+        accumulator = iterator(accumulator, element);
+      }
+    });
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
