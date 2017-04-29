@@ -317,14 +317,21 @@
   // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
   // same thing as once, but based on many sets of unique arguments.
   //
-  // _.memoize should return a function that, when called, will check if it has
+  // _.memoize should rturn a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var result = {};
 
+    return function() {
+      var argument = JSON.stringify(arguments);
+        if (!result[argument]) {
+          result[argument] = func.apply(this, arguments);
+        }
+        return result[argument];
+      };
+};
 
-
-  };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
